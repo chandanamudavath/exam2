@@ -17,31 +17,19 @@ pipeline {
 
         stage('Tag Docker Image') {
             steps {
-                bat 'docker tag hi:latest mudavathchandana/kubernetes8:latest'
+                bat 'docker tag hi:latest mudavathchandana/kubernetes:latest'
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                bat 'docker push mudavathchandana/kubernetes8:latest'
+                bat 'docker push mudavathchandana/kubernetes:latest'
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                bat 'kubectl apply -f deployment.yaml'
-                bat 'kubectl apply -f service.yaml'
-            }
-        }
+        
 
-        stage('Verify Deployment') {
-            steps {
-                bat 'kubectl get pods'
-                bat 'kubectl get services'
-            }
-        }
-    }
-
+       
     post {
         success {
             echo 'Week 8 pipeline completed successfully!'
